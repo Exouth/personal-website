@@ -1,10 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { FaChevronDown, FaTimes, FaBars } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AnimatedGradientText } from "@ui/magicui/animated-gradient-text";
 import useAnimation from "@hooks/useAnimation";
 import useScroll from "@hooks/useScroll";
 import useWindowSize from "@hooks/useWindowSize";
+import useNavigation from "@hooks/useNavigation";
 import { navigationLinks } from "@data/navigation";
 
 export default function Navbar() {
@@ -14,6 +16,20 @@ export default function Navbar() {
   const { hoverScale, hoverScaleOnly } = useAnimation();
   const { scrollToSection } = useScroll();
   const windowSize = useWindowSize();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
+  
+  const { handleNavClick } = useNavigation({
+    scrollToSection,
+    navigate,
+    isHomePage,
+    onBeforeNavigate: () => {
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    }
+  });
 
   useEffect(() => {
     if (windowSize.breakpoint !== 'xs' && windowSize.breakpoint !== 'sm' && mobileMenuOpen) {
@@ -30,15 +46,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = useCallback((href: string) => {
-    if (mobileMenuOpen) {
-      setMobileMenuOpen(false);
-    }
-    
-    const targetId = href.startsWith('#') ? href.substring(1) : href;
-    scrollToSection(targetId);
-  }, [mobileMenuOpen, scrollToSection]);
-
   const isMobile = windowSize.breakpoint === 'xs' || windowSize.breakpoint === 'sm';
 
   return (
@@ -53,10 +60,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           <motion.a
             href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('home');
-            }}
+            onClick={(e) => handleNavClick(e, '#home')}
             {...hoverScaleOnly()}
             className="text-2xl font-bold text-white"
           >
@@ -81,10 +85,7 @@ export default function Navbar() {
                   >
                     <motion.a
                       href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.href);
-                      }}
+                      onClick={(e) => handleNavClick(e, item.href)}
                       {...hoverScale()}
                       className="text-gray-300 hover:text-white transition-colors flex items-center"
                     >
@@ -114,10 +115,7 @@ export default function Navbar() {
                               <li key={dropdown.name}>
                                 <a
                                   href={dropdown.href}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    handleNavClick(dropdown.href);
-                                  }}
+                                  onClick={(e) => handleNavClick(e, dropdown.href)}
                                   className="block px-6 py-3 hover:bg-gray-800 transition-colors duration-200 rounded-md whitespace-nowrap"
                                 >
                                   {dropdown.name}
@@ -133,10 +131,7 @@ export default function Navbar() {
                   <motion.a
                     key={item.name}
                     href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.href);
-                    }}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     {...hoverScale()}
                     className="text-gray-300 hover:text-white transition-colors"
                   >
@@ -174,10 +169,7 @@ export default function Navbar() {
                   <div key={item.name}>
                     <a
                       href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.href);
-                      }}
+                      onClick={(e) => handleNavClick(e, item.href)}
                       className="text-gray-200 hover:text-white block py-2 text-lg"
                     >
                       {item.name}
@@ -188,10 +180,7 @@ export default function Navbar() {
                           <a
                             key={dropdown.name}
                             href={dropdown.href}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleNavClick(dropdown.href);
-                            }}
+                            onClick={(e) => handleNavClick(e, dropdown.href)}
                             className="text-gray-400 hover:text-white block py-2"
                           >
                             {dropdown.name}

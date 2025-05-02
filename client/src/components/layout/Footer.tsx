@@ -1,14 +1,25 @@
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { SiKofi, SiNexusmods } from "react-icons/si";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAnimation from "@hooks/useAnimation";
 import useScroll from "@hooks/useScroll";
+import useNavigation from "@hooks/useNavigation";
 import { footerLinks, socialLinksInfo } from "@data/navigation";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const { fadeInUp, hoverScale } = useAnimation();
   const { scrollToSection } = useScroll();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
+
+  const { handleNavClick } = useNavigation({
+    scrollToSection,
+    navigate,
+    isHomePage
+  });
 
   const socialLinks = [
     { 
@@ -24,13 +35,6 @@ const Footer: React.FC = () => {
       icon: <SiKofi size={22} />
     },
   ];
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    if (href.startsWith('#')) {
-      scrollToSection(href.substring(1));
-    }
-  };
 
   return (
     <footer className="bg-gray-900 py-12 border-t border-gray-800">
@@ -80,6 +84,15 @@ const Footer: React.FC = () => {
 
         <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500">
           <p>© {currentYear} Exouth. All rights reserved.</p>
+          
+          <div className="mt-4 flex justify-center">
+            <Link
+              to="/legal-notice"
+              className="text-gray-500 hover:text-gray-300 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md p-1"
+            >
+              Legal Notice
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
