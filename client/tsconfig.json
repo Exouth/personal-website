@@ -14,7 +14,8 @@
       "@styles/*": ["./src/styles/*"],
       "@ui/*": ["./src/ui/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@pages/*": ["./src/pages/*"]
     }
   }
 }
