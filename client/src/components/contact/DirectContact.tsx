@@ -116,34 +116,34 @@ const DirectContact: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex-1 bg-discord-dark rounded-lg p-4 flex flex-col">
-              <div className="flex items-center gap-3">
-                <div>
-                  <div className="font-semibold text-white">Marcel</div>
-                  <div className="text-gray-400 text-sm">@exouth</div>
-                </div>
-              </div>
-              
-              <div className="mt-auto pt-3 border-t border-gray-700">
-                <div className="flex items-center bg-gray-800/50 p-2 rounded-md">
-                  <span className="text-xs font-mono text-gray-400 mr-2">ID:</span>
-                  <span className="text-xs font-mono text-gray-300 select-all">285464053437038595</span>
-                  <motion.button 
-                    className="ml-auto p-1 hover:bg-gray-700 rounded-md transition-colors" 
-                    title="Copy ID"
-                    onClick={() => copyToClipboard("285464053437038595", true)}
-                    {...hoverScaleOnly()}
-                  >
-                    {isCopied(true) ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                      </svg>
-                    )}
-                  </motion.button>
+            <div className="flex-1 bg-[#2B2D31] rounded-lg p-4 flex flex-col shadow-lg overflow-hidden border border-gray-800">
+              <div className="flex items-start">
+                <div className="w-full bg-[#232428] rounded-md overflow-hidden p-4">
+                  <div className="flex flex-col">
+                    <div className="font-bold text-white text-lg">Marcel</div>
+                    <div className="text-gray-400 text-sm">@exouth</div>
+                    
+                    <div className="mt-4 flex items-center bg-[#1E1F22] p-2 rounded-md">
+                      <span className="text-xs font-mono text-gray-400 mr-2">ID:</span>
+                      <span className="text-xs font-mono text-gray-300 select-all">285464053437038595</span>
+                      <motion.button 
+                        className="ml-auto p-1 hover:bg-gray-700 rounded-md transition-colors" 
+                        title="Copy ID"
+                        onClick={() => copyToClipboard("285464053437038595", true)}
+                        {...hoverScaleOnly()}
+                      >
+                        {isCopied(true) ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                        )}
+                      </motion.button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
