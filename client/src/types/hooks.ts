@@ -1,4 +1,5 @@
 import { TargetAndTransition, VariantLabels } from 'framer-motion';
+import { NavigateFunction } from 'react-router-dom';
 
 /**
  * WindowSize returns window size and breakpoint information
@@ -70,4 +71,14 @@ export type CopyState = string | boolean | null;
 export interface ResponsivePadding {
   sectionPadding: string;
   containerPadding: string;
+}
+
+/**
+ * Options for the useNavigation Hook
+ */
+export interface UseNavigationOptions {
+  scrollToSection: (sectionId: string) => void;
+  navigate: NavigateFunction;
+  isHomePage: boolean;
+  onBeforeNavigate?: () => void;
 } 

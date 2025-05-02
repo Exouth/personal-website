@@ -11,7 +11,8 @@
       "@styles/*": ["./src/styles/*"],
       "@ui/*": ["./src/ui/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@pages/*": ["./src/pages/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
