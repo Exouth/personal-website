@@ -7,6 +7,7 @@ import { getPageMetadata } from "@data/seo";
 import { DonationOptions } from "@components/donate/DonationOptions";
 import { PGPKeyDisplay } from "@components/donate/PGPKeyDisplay";
 import { CryptoAddressDisplay } from "@components/donate/CryptoAddressDisplay";
+import { AnimatedGradientText } from "@ui/magicui/animated-gradient-text";
 
 const Donate = () => {
   const { sectionPadding, containerPadding } = useResponsivePadding();
@@ -77,8 +78,15 @@ const Donate = () => {
               transition={{ delay: 0.1 }}
               className="text-center mb-12"
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-500">
-                Support My Work
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                <AnimatedGradientText
+                  speed={1.5}
+                  colorFrom="#818cf8"
+                  colorTo="#c084fc"
+                  className="text-4xl md:text-5xl font-bold"
+                >
+                  Support My Work
+                </AnimatedGradientText>
               </h1>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
                 Thank you for stopping by! If my work has helped or inspired
