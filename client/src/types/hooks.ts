@@ -81,4 +81,20 @@ export interface UseNavigationOptions {
   navigate: NavigateFunction;
   isHomePage: boolean;
   onBeforeNavigate?: () => void;
-} 
+}
+
+/**
+ * Options for the useDownload Hook
+ */
+export interface UseDownloadOptions {
+  /**
+   * Duration in milliseconds for the download status feedback
+   * @default 2000
+   */
+  successDuration?: number;
+}
+
+/**
+ * Type for the Download status
+ */
+export type DownloadState = string | boolean | null; 
