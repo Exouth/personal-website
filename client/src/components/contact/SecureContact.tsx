@@ -2,14 +2,21 @@ import React from "react";
 import { motion } from "framer-motion";
 import useAnimation from "@hooks/useAnimation";
 import useClipboard from "@hooks/useClipboard";
+import useDownload from "@hooks/useDownload";
 import { pgpKey, pgpFingerprint } from "@data/pgp";
+import { FiCopy, FiDownload, FiExternalLink } from "react-icons/fi";
 
 const SecureContact: React.FC = () => {
   const { fadeInUp } = useAnimation();
   const { copyToClipboard, isCopied } = useClipboard();
+  const { markAsDownloaded, isDownloaded } = useDownload();
 
   const formatFingerprint = (fp: string): string => {
     return fp.match(/.{1,4}/g)?.join(" ") || fp;
+  };
+
+  const handleDownload = () => {
+    markAsDownloaded("pgp-key");
   };
 
   return (
@@ -42,9 +49,9 @@ const SecureContact: React.FC = () => {
 
       <div className="p-6">
         <div className="grid grid-cols-1 gap-6">
-          <div className="h-full flex flex-col p-5 bg-gradient-to-r from-green-900/30 to-teal-900/30 border border-green-800/30 rounded-xl">
+          <div className="group h-full flex flex-col p-5 bg-gradient-to-r from-green-900/30 to-teal-900/30 border border-green-800/30 rounded-xl transition-all duration-300 hover:bg-green-900/40 hover:border-green-700/40">
             <div className="flex items-center mb-3">
-              <div className="bg-gradient-to-br from-green-500 to-teal-500 p-2.5 rounded-lg shadow-lg shadow-green-500/20">
+              <div className="bg-gradient-to-br from-green-500 to-teal-500 p-2.5 rounded-lg shadow-lg shadow-green-500/20 group-hover:shadow-green-500/30 transition-all">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-5 h-5 text-white"
@@ -68,26 +75,23 @@ const SecureContact: React.FC = () => {
               </div>
             </div>
 
-            <div
-              className="group relative flex-1 bg-gray-800 p-3 rounded-lg font-mono text-green-300 text-sm tracking-wider border border-gray-700 select-all transition-colors duration-300 hover:text-green-200 hover:border-green-900/60 flex items-center cursor-pointer"
-              onClick={() => copyToClipboard(pgpFingerprint, "fingerprint")}
-              role="button"
-              tabIndex={0}
-              aria-label="Copy fingerprint"
-              title="Click to copy"
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  copyToClipboard(pgpFingerprint, "fingerprint");
-                }
-              }}
-            >
-              {formatFingerprint(pgpFingerprint)}
-              <div className="absolute right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                {isCopied("fingerprint") ? (
-                  <span className="text-green-400 flex items-center">
+            <div className="relative w-full group">
+              <div className="p-4 bg-gray-800 border border-gray-700 rounded-lg break-all text-sm font-mono flex justify-between items-center text-green-300 transition-all duration-300 group-hover:bg-gray-700 group-hover:border-green-800">
+                <div className="flex-grow mr-2 select-all">
+                  {formatFingerprint(pgpFingerprint)}
+                </div>
+                <motion.button
+                  className="p-2 hover:bg-gray-700/70 rounded-md transition-colors"
+                  title="Copy Fingerprint"
+                  onClick={() => copyToClipboard(pgpFingerprint, "fingerprint")}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Copy fingerprint to clipboard"
+                >
+                  {isCopied("fingerprint") ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 mr-1"
+                      className="w-5 h-5 text-green-400"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -100,25 +104,10 @@ const SecureContact: React.FC = () => {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    Copied
-                  </span>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                    />
-                  </svg>
-                )}
+                  ) : (
+                    <FiCopy className="w-5 h-5 text-gray-400 group-hover:text-gray-300" />
+                  )}
+                </motion.button>
               </div>
             </div>
           </div>
@@ -144,104 +133,57 @@ const SecureContact: React.FC = () => {
             </h4>
 
             <div className="flex-1 flex flex-col bg-gray-800 rounded-lg p-4">
-              <div className="relative flex-1">
-                <div className="h-48 overflow-x-auto overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900 whitespace-pre font-mono text-xs text-gray-300 p-2 border border-gray-700 rounded-md">
+              <div className="relative">
+                <pre className="h-48 overflow-x-auto overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900 whitespace-pre font-mono text-xs text-gray-300 p-3 border border-gray-700 rounded-md">
                   {pgpKey}
-                </div>
-                <div className="absolute top-2 right-2 p-1 flex gap-2">
-                  <button
-                    className="p-1.5 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1 focus:ring-offset-gray-800"
-                    title="Copy"
+                </pre>
+                <div className="absolute top-3 right-3">
+                  <motion.button
                     onClick={() => copyToClipboard(pgpKey, "pgpkey")}
-                    aria-label="Copy public key"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded transition-colors"
+                    aria-label="Copy PGP public key"
+                    title="Copy to clipboard"
                   >
-                    {isCopied("pgpkey") ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 text-green-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 text-gray-300"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                        />
-                      </svg>
-                    )}
-                  </button>
+                    <FiCopy size={14} />
+                    {isCopied("pgpkey") ? "Copied!" : "Copy"}
+                  </motion.button>
                 </div>
               </div>
 
               <div className="mt-auto pt-3 border-t border-gray-700">
                 <div className="flex flex-wrap gap-3">
-                  <a
+                  <motion.a
                     href="/exouth_publickey.asc"
                     download="exouth_publickey.asc"
-                    className="flex-1 py-2 bg-gradient-to-r from-green-600/80 to-teal-600/80 hover:from-green-500 hover:to-teal-500 transition-colors rounded-lg text-white flex items-center justify-center gap-2 shadow-lg shadow-green-600/20 hover:shadow-green-500/30 group focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex-1 py-2 bg-gradient-to-r from-green-600/80 to-teal-600/80 hover:from-green-500 hover:to-teal-500 transition-colors rounded-lg text-white flex items-center justify-center gap-2 shadow-lg shadow-green-600/20 hover:shadow-green-500/30"
                     aria-label="Download public key"
+                    title="Download as .asc file"
+                    onClick={handleDownload}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 group-hover:translate-y-0.5 transition-transform"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                      />
-                    </svg>
-                    Download Public-Key
-                  </a>
+                    <FiDownload size={16} />
+                    <span>
+                      {isDownloaded("pgp-key")
+                        ? "Downloaded!"
+                        : "Download Public-Key"}
+                    </span>
+                  </motion.a>
 
-                  <a
+                  <motion.a
                     href="https://keys.openpgp.org/search?q=Exouth@email.de"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 py-2 bg-gray-700 hover:bg-gray-600 transition-colors rounded-lg text-white flex items-center justify-center gap-2 group focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex-1 py-2 bg-gray-700 hover:bg-gray-600 transition-colors rounded-lg text-white flex items-center justify-center gap-2"
                     aria-label="Visit key server"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 group-hover:translate-x-0.5 transition-transform"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                    Keyserver
-                  </a>
+                    <FiExternalLink size={16} />
+                    <span>Keyserver</span>
+                  </motion.a>
                 </div>
               </div>
             </div>
