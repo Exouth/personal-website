@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
-import { FaArrowDown } from "react-icons/fa";
-import { AnimatedGradientText } from "@ui/magicui/animated-gradient-text";
-import useAnimation from "@hooks/useAnimation";
-import useScroll from "@hooks/useScroll";
-import useWindowSize from "@hooks/useWindowSize";
-import { useMemo } from "react";
+import { motion } from 'framer-motion';
+import { FaArrowDown } from 'react-icons/fa';
+import { AnimatedGradientText } from '@ui/magicui/animated-gradient-text';
+import useAnimation from '@hooks/useAnimation';
+import useScroll from '@hooks/useScroll';
+import useWindowSize from '@hooks/useWindowSize';
+import { useMemo } from 'react';
 
 export default function Hero() {
   const { scrollToSection } = useScroll();
@@ -13,43 +13,43 @@ export default function Hero() {
 
   const titleSize = useMemo(() => {
     const sizeMap = {
-      'xs': 'text-5xl',
-      'sm': 'text-6xl',
-      'md': 'text-7xl',
-      'lg': 'text-8xl',
-      'xl': 'text-8xl',
-      '2xl': 'text-8xl'
+      xs: 'text-5xl',
+      sm: 'text-6xl',
+      md: 'text-7xl',
+      lg: 'text-8xl',
+      xl: 'text-8xl',
+      '2xl': 'text-8xl',
     };
-    
+
     return sizeMap[windowSize.breakpoint];
   }, [windowSize.breakpoint]);
 
   const subtitleSize = useMemo(() => {
     const sizeMap = {
-      'xs': 'text-xl',
-      'sm': 'text-xl',
-      'md': 'text-2xl',
-      'lg': 'text-3xl',
-      'xl': 'text-3xl',
-      '2xl': 'text-3xl'
+      xs: 'text-xl',
+      sm: 'text-xl',
+      md: 'text-2xl',
+      lg: 'text-3xl',
+      xl: 'text-3xl',
+      '2xl': 'text-3xl',
     };
-    
+
     return sizeMap[windowSize.breakpoint];
   }, [windowSize.breakpoint]);
 
   const descriptionSize = useMemo(() => {
     const sizeMap = {
-      'xs': 'text-lg max-w-xl',
-      'sm': 'text-lg max-w-xl',
-      'md': 'text-xl max-w-2xl',
-      'lg': 'text-2xl max-w-3xl',
-      'xl': 'text-2xl max-w-3xl',
-      '2xl': 'text-2xl max-w-3xl'
+      xs: 'text-lg max-w-xl',
+      sm: 'text-lg max-w-xl',
+      md: 'text-xl max-w-2xl',
+      lg: 'text-2xl max-w-3xl',
+      xl: 'text-2xl max-w-3xl',
+      '2xl': 'text-2xl max-w-3xl',
     };
-    
+
     return sizeMap[windowSize.breakpoint];
   }, [windowSize.breakpoint]);
-  
+
   const buttonPadding = useMemo(() => {
     return windowSize.breakpoint === 'xs' || windowSize.breakpoint === 'sm' ? 'px-6' : 'px-8';
   }, [windowSize.breakpoint]);
@@ -71,17 +71,14 @@ export default function Hero() {
           aria-hidden="true"
         />
 
-        <div 
+        <div
           className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] will-change-auto"
           aria-hidden="true"
         />
       </div>
 
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        <motion.div
-          {...fadeInUp(0)}
-          className="mb-6"
-        >
+        <motion.div {...fadeInUp(0)} className="mb-6">
           <h1 className="font-bold mb-4">
             <AnimatedGradientText
               speed={1.5}
@@ -97,17 +94,12 @@ export default function Hero() {
           </p>
         </motion.div>
 
-        <motion.p
-          {...fadeInUp(0.2)}
-          className={`${descriptionSize} text-gray-300 mb-12 mx-auto`}
-        >
-          Im a developer passionate about security, game modding and building useful things. From low-level tools to modern web experiences.
+        <motion.p {...fadeInUp(0.2)} className={`${descriptionSize} text-gray-300 mb-12 mx-auto`}>
+          Im a developer passionate about security, game modding and building useful things. From
+          low-level tools to modern web experiences.
         </motion.p>
 
-        <motion.div
-          {...fadeInUp(0.4)}
-          className="flex flex-col sm:flex-row gap-6 justify-center"
-        >
+        <motion.div {...fadeInUp(0.4)} className="flex flex-col sm:flex-row gap-6 justify-center">
           <motion.a
             href="#projects"
             onClick={(e) => {

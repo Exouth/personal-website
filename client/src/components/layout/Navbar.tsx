@@ -1,13 +1,13 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { FaChevronDown, FaTimes, FaBars } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router-dom";
-import { AnimatedGradientText } from "@ui/magicui/animated-gradient-text";
-import useAnimation from "@hooks/useAnimation";
-import useScroll from "@hooks/useScroll";
-import useWindowSize from "@hooks/useWindowSize";
-import useNavigation from "@hooks/useNavigation";
-import { navigationLinks } from "@data/navigation";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { FaChevronDown, FaTimes, FaBars } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AnimatedGradientText } from '@ui/magicui/animated-gradient-text';
+import useAnimation from '@hooks/useAnimation';
+import useScroll from '@hooks/useScroll';
+import useWindowSize from '@hooks/useWindowSize';
+import useNavigation from '@hooks/useNavigation';
+import { navigationLinks } from '@data/navigation';
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -18,8 +18,8 @@ export default function Navbar() {
   const windowSize = useWindowSize();
   const location = useLocation();
   const navigate = useNavigate();
-  const isHomePage = location.pathname === "/";
-  
+  const isHomePage = location.pathname === '/';
+
   const { handleNavClick } = useNavigation({
     scrollToSection,
     navigate,
@@ -28,7 +28,7 @@ export default function Navbar() {
       if (mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
-    }
+    },
   });
 
   useEffect(() => {
@@ -42,8 +42,8 @@ export default function Navbar() {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const isMobile = windowSize.breakpoint === 'xs' || windowSize.breakpoint === 'sm';
@@ -53,7 +53,9 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/90 backdrop-blur-md py-2 shadow-xl" : "bg-black/70 backdrop-blur-sm py-4"
+        scrolled
+          ? 'bg-black/90 backdrop-blur-md py-2 shadow-xl'
+          : 'bg-black/70 backdrop-blur-sm py-4'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -64,11 +66,7 @@ export default function Navbar() {
             {...hoverScaleOnly()}
             className="text-2xl font-bold text-white"
           >
-            <AnimatedGradientText
-              speed={1}
-              colorFrom="#3b82f6"
-              colorTo="#ec4899"
-            >
+            <AnimatedGradientText speed={1} colorFrom="#3b82f6" colorTo="#ec4899">
               Exouth.dev
             </AnimatedGradientText>
           </motion.a>
@@ -137,7 +135,7 @@ export default function Navbar() {
                   >
                     {item.name}
                   </motion.a>
-                )
+                ),
               )}
             </div>
           )}
@@ -147,7 +145,7 @@ export default function Navbar() {
               className="text-white"
               whileTap={{ scale: 0.95 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Menu close" : "Menu open"}
+              aria-label={mobileMenuOpen ? 'Menu close' : 'Menu open'}
             >
               {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </motion.button>
@@ -159,7 +157,7 @@ export default function Navbar() {
         {mobileMenuOpen && isMobile && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="bg-gray-900 overflow-hidden"
           >

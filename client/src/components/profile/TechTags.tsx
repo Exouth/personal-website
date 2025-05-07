@@ -1,5 +1,5 @@
-import React from "react";
-import { techCategories } from "@data/technologies";
+import React from 'react';
+import { techCategories } from '@data/technologies';
 
 const TechTags: React.FC = () => {
   return (
@@ -7,17 +7,13 @@ const TechTags: React.FC = () => {
       {techCategories.map((category) => (
         <div key={category.title} className="mb-6">
           <div className="flex items-center gap-3 mb-4">
-            <span className={`text-xl ${category.textColor}`}>
-              {category.icon}
-            </span>
+            <span className={`text-xl ${category.textColor}`}>{category.icon}</span>
             <h4
               className={`text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r ${category.color}`}
             >
               {category.title}
             </h4>
-            <div
-              className={`h-px flex-grow bg-gradient-to-r ${category.color} opacity-20`}
-            ></div>
+            <div className={`h-px flex-grow bg-gradient-to-r ${category.color} opacity-20`}></div>
           </div>
 
           <div className="flex flex-wrap gap-3">

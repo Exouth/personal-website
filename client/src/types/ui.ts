@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef } from 'react';
 
 /**
  * Available Color Options
@@ -6,9 +6,9 @@ import { ComponentPropsWithoutRef } from "react";
 export type ColorKey = 'blue' | 'purple' | 'amber';
 
 /**
-  * Properties for text with animated gradient
+ * Properties for text with animated gradient
  */
-export interface AnimatedGradientTextProps extends ComponentPropsWithoutRef<"div"> {
+export interface AnimatedGradientTextProps extends ComponentPropsWithoutRef<'div'> {
   speed?: number;
   colorFrom?: string;
   colorTo?: string;
@@ -45,4 +45,4 @@ export interface TechCategory {
 /**
  * Color Schemes for UI Elements
  */
-export type CategoryColorScheme = Record<ColorKey, string>; 
+export type CategoryColorScheme = Record<ColorKey, string>;

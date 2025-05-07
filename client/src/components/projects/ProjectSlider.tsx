@@ -17,67 +17,67 @@ const ProjectsSlider: React.FC<ProjectsSliderProps> = ({ idPrefix = 'main' }) =>
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const { fadeInLeft, fadeInRight, hoverScale } = useAnimation();
-  
+
   const windowSize = useWindowSize();
-  
+
   const calculateTotalSlides = useCallback(() => {
     if (!sliderRef.current) return;
-    
+
     const sliderWidth = sliderRef.current.scrollWidth;
     const containerWidth = sliderRef.current.offsetWidth;
     const slideCount = Math.ceil(sliderWidth / containerWidth);
-    
+
     setTotalSlides(Math.max(1, slideCount));
   }, []);
-  
+
   useEffect(() => {
     if (windowSize.isClient && windowSize.width > 0) {
       calculateTotalSlides();
     }
   }, [windowSize.width, calculateTotalSlides, windowSize.isClient]);
-  
+
   const handleScroll = useCallback(() => {
     const slider = sliderRef.current;
     if (!slider) return;
-    
+
     const scrollPosition = slider.scrollLeft;
     const containerWidth = slider.offsetWidth;
     const maxScroll = slider.scrollWidth - containerWidth;
-    
+
     if (maxScroll <= 0) {
       setIsAtStart(true);
       setIsAtEnd(true);
       setActiveIndex(0);
       return;
     }
-    
+
     const tolerance = 10;
     const newIsAtStart = scrollPosition <= tolerance;
     const newIsAtEnd = maxScroll - scrollPosition <= tolerance;
-    
+
     setIsAtStart(newIsAtStart);
     setIsAtEnd(newIsAtEnd);
-    
+
     const newIndex = Math.round((scrollPosition / maxScroll) * (totalSlides - 1));
-    
+
     if (newIndex !== activeIndex) {
       setActiveIndex(newIndex);
     }
   }, [activeIndex, totalSlides]);
-  
+
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
-    
+
     slider.addEventListener('scroll', handleScroll);
     handleScroll();
-    
+
     return () => slider.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
   const handleSlideLeft = () => {
     if (!sliderRef.current) return;
-    
+
     if (activeIndex > 0) {
       scrollToIndex(activeIndex - 1);
     }
@@ -85,25 +85,25 @@ const ProjectsSlider: React.FC<ProjectsSliderProps> = ({ idPrefix = 'main' }) =>
 
   const handleSlideRight = () => {
     if (!sliderRef.current) return;
-    
+
     if (activeIndex < totalSlides - 1) {
       scrollToIndex(activeIndex + 1);
     }
   };
-  
+
   const scrollToIndex = (index: number) => {
     if (!sliderRef.current || totalSlides <= 1) return;
-    
+
     const slider = sliderRef.current;
     const maxScroll = slider.scrollWidth - slider.offsetWidth;
-    
+
     const scrollPosition = (index / (totalSlides - 1)) * maxScroll;
-    
+
     slider.scrollTo({
       left: scrollPosition,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
-    
+
     setActiveIndex(index);
   };
 
@@ -130,7 +130,7 @@ const ProjectsSlider: React.FC<ProjectsSliderProps> = ({ idPrefix = 'main' }) =>
   return (
     <div className="relative">
       {!isAtStart && windowSize.width >= 768 && (
-        <motion.button 
+        <motion.button
           className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-gray-900/80 p-3 rounded-full flex items-center justify-center z-10 text-gray-300 hover:text-white hover:bg-gray-800 transition-colors shadow-md backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           onClick={handleSlideLeft}
           aria-label="Show previous project"
@@ -138,14 +138,26 @@ const ProjectsSlider: React.FC<ProjectsSliderProps> = ({ idPrefix = 'main' }) =>
           {...fadeInLeft()}
           {...hoverScale()}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </motion.button>
       )}
-      
+
       {!isAtEnd && windowSize.width >= 768 && (
-        <motion.button 
+        <motion.button
           className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-gray-900/80 p-3 rounded-full flex items-center justify-center z-10 text-gray-300 hover:text-white hover:bg-gray-800 transition-colors shadow-md backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           onClick={handleSlideRight}
           aria-label="Show next project"
@@ -153,20 +165,27 @@ const ProjectsSlider: React.FC<ProjectsSliderProps> = ({ idPrefix = 'main' }) =>
           {...fadeInRight()}
           {...hoverScale()}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </motion.button>
       )}
-      
-      <div 
+
+      <div
         ref={sliderRef}
         id={sliderId}
         className="flex overflow-x-auto gap-6 py-2 px-1 snap-x snap-mandatory scrollbar-hide"
-        style={{ 
-          scrollbarWidth: 'none', 
+        style={{
+          scrollbarWidth: 'none',
           msOverflowStyle: 'none',
-          paddingBottom: '20px'
+          paddingBottom: '20px',
         }}
         aria-live="polite"
         role="region"
@@ -174,8 +193,8 @@ const ProjectsSlider: React.FC<ProjectsSliderProps> = ({ idPrefix = 'main' }) =>
         tabIndex={0}
       >
         {projectsData.map((project, index) => (
-          <div 
-            key={project.id} 
+          <div
+            key={project.id}
             className={`flex-shrink-0 ${cardWidthClass} snap-start`}
             aria-hidden={activeIndex !== index}
           >
@@ -183,9 +202,9 @@ const ProjectsSlider: React.FC<ProjectsSliderProps> = ({ idPrefix = 'main' }) =>
           </div>
         ))}
       </div>
-      
+
       {totalSlides > 1 && (
-        <div 
+        <div
           className="flex justify-center mt-8 gap-2"
           role="tablist"
           aria-label="Slider Navigation"

@@ -1,25 +1,25 @@
-import { motion } from "framer-motion";
-import { FiExternalLink } from "react-icons/fi";
-import QRCode from "react-qr-code";
-import useClipboard from "@hooks/useClipboard";
-import { cryptoOptions } from "@data/crypto";
-import { CryptoAddressDisplayProps } from "@/types/donate";
+import { motion } from 'framer-motion';
+import { FiExternalLink } from 'react-icons/fi';
+import QRCode from 'react-qr-code';
+import useClipboard from '@hooks/useClipboard';
+import { cryptoOptions } from '@data/crypto';
+import { CryptoAddressDisplayProps } from '@/types/donate';
 
 export const CryptoAddressDisplay = ({ selectedOption }: CryptoAddressDisplayProps) => {
   const { copyToClipboard, isCopied } = useClipboard();
-  
+
   const handleCopyAddress = (address: string, id: string) => {
     copyToClipboard(address, id);
   };
 
   const handleCopyPGP = (pgpSignature: string, id: string) => {
-    copyToClipboard(pgpSignature, id + "-pgp");
+    copyToClipboard(pgpSignature, id + '-pgp');
   };
 
-  const selectedCrypto = selectedOption 
-    ? cryptoOptions.find(option => option.id === selectedOption) 
+  const selectedCrypto = selectedOption
+    ? cryptoOptions.find((option) => option.id === selectedOption)
     : null;
-    
+
   if (!selectedCrypto) return null;
 
   return (
@@ -32,15 +32,13 @@ export const CryptoAddressDisplay = ({ selectedOption }: CryptoAddressDisplayPro
       className="mt-8 p-7 rounded-xl bg-gradient-to-br from-blue-900/40 via-gray-800/60 to-purple-900/40 backdrop-blur-sm shadow-lg border border-gray-700/60 hover:shadow-blue-900/10 hover:border-blue-900/30 transition-all duration-300"
     >
       <div className="flex flex-col items-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
           className="flex items-center gap-2 mb-2"
         >
-          <div className={`p-3 rounded-full ${selectedCrypto.color}`}>
-            {selectedCrypto.icon}
-          </div>
+          <div className={`p-3 rounded-full ${selectedCrypto.color}`}>{selectedCrypto.icon}</div>
           <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-blue-400">
             {selectedCrypto.name} Address
           </h3>
@@ -48,9 +46,7 @@ export const CryptoAddressDisplay = ({ selectedOption }: CryptoAddressDisplayPro
 
         {selectedCrypto.network && (
           <div className="mb-4 text-center">
-            <span className="text-sm text-gray-400">
-              Network: {selectedCrypto.network}
-            </span>
+            <span className="text-sm text-gray-400">Network: {selectedCrypto.network}</span>
           </div>
         )}
 
@@ -119,7 +115,7 @@ export const CryptoAddressDisplay = ({ selectedOption }: CryptoAddressDisplayPro
 
             {selectedCrypto.explorerUrl && (
               <div className="mb-4">
-                <a 
+                <a
                   href={selectedCrypto.explorerUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -132,14 +128,14 @@ export const CryptoAddressDisplay = ({ selectedOption }: CryptoAddressDisplayPro
               </div>
             )}
           </div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
             className="md:col-span-2 flex justify-center items-center p-3 bg-white rounded-lg"
           >
-            <QRCode 
+            <QRCode
               value={selectedCrypto.address}
               size={150}
               level="M"
@@ -148,7 +144,7 @@ export const CryptoAddressDisplay = ({ selectedOption }: CryptoAddressDisplayPro
             />
           </motion.div>
         </div>
-        
+
         {selectedCrypto.pgpSignature && (
           <div className="mt-6 w-full">
             <div className="flex items-center justify-between mb-2">
@@ -160,7 +156,7 @@ export const CryptoAddressDisplay = ({ selectedOption }: CryptoAddressDisplayPro
                 className="text-xs bg-gray-700/70 hover:bg-gray-600/70 px-3 py-1 rounded transition-colors"
                 aria-label="Copy PGP signature"
               >
-                {isCopied(selectedCrypto.id + "-pgp") ? "Copied!" : "Copy Signature"}
+                {isCopied(selectedCrypto.id + '-pgp') ? 'Copied!' : 'Copy Signature'}
               </motion.button>
             </div>
             <div className="w-full bg-gray-800/70 border border-gray-700/60 rounded-lg">
@@ -180,4 +176,4 @@ export const CryptoAddressDisplay = ({ selectedOption }: CryptoAddressDisplayPro
       </div>
     </motion.div>
   );
-}; 
+};

@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
-import { SiKofi } from "react-icons/si";
-import useAnimation from "@hooks/useAnimation";
-import { CryptoCurrencySelector } from "@components/donate/CryptoCurrencySelector";
-import { cryptoOptions } from "@data/crypto";
-import { DonationOptionsProps } from "@/types/donate";
+import { motion } from 'framer-motion';
+import { SiKofi } from 'react-icons/si';
+import useAnimation from '@hooks/useAnimation';
+import { CryptoCurrencySelector } from '@components/donate/CryptoCurrencySelector';
+import { cryptoOptions } from '@data/crypto';
+import { DonationOptionsProps } from '@/types/donate';
 
 export const DonationOptions = ({ selectedOption, setSelectedOption }: DonationOptionsProps) => {
   const { hoverScaleOnly } = useAnimation();
@@ -29,9 +29,7 @@ export const DonationOptions = ({ selectedOption, setSelectedOption }: DonationO
           <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
             Buy Me a Coffee
           </h2>
-          <p className="text-gray-300">
-            Support me with a one-time donation through Ko-fi
-          </p>
+          <p className="text-gray-300">Support me with a one-time donation through Ko-fi</p>
         </div>
 
         <div className="flex justify-center">
@@ -59,12 +57,10 @@ export const DonationOptions = ({ selectedOption, setSelectedOption }: DonationO
           <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
             Cryptocurrency Donations
           </h2>
-          <p className="text-gray-300">
-            Support me through various cryptocurrency options
-          </p>
+          <p className="text-gray-300">Support me through various cryptocurrency options</p>
         </div>
 
-        <CryptoCurrencySelector 
+        <CryptoCurrencySelector
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
           containerVariants={containerVariants}
@@ -73,4 +69,4 @@ export const DonationOptions = ({ selectedOption, setSelectedOption }: DonationO
       </motion.div>
     </div>
   );
-}; 
+};

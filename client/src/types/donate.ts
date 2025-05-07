@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 /**
  * Represents a cryptocurrency option for donations
@@ -46,4 +46,4 @@ export interface DonationOptionsProps {
 export interface PGPKeyDisplayProps {
   showPgpKey: boolean;
   setShowPgpKey: (show: boolean) => void;
-} 
+}

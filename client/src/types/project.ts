@@ -28,4 +28,4 @@ export interface ProjectLinks {
 /**
  * Extended ProjectBase, if additional properties are needed in the future
  */
-export type Project = ProjectBase; 
+export type Project = ProjectBase;

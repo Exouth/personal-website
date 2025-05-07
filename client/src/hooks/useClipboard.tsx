@@ -3,7 +3,7 @@ import { UseClipboardOptions, CopyState } from '@/types/hooks';
 
 /**
  * Hook for managing clipboard operations with feedback status
- * 
+ *
  * @param options Options for the hook
  * @returns Clipboard functions and status
  */
@@ -13,13 +13,14 @@ export const useClipboard = (options: UseClipboardOptions = {}) => {
 
   /**
    * Copies text to the clipboard and sets a feedback status
-   * 
+   *
    * @param text The text to copy
    * @param identifier Optional: An identifier for the copied content (for multiple copy actions)
    */
   const copyToClipboard = useCallback(
     (text: string, identifier?: string | boolean) => {
-      navigator.clipboard.writeText(text)
+      navigator.clipboard
+        .writeText(text)
         .then(() => {
           setCopyState(identifier !== undefined ? identifier : true);
           setTimeout(() => setCopyState(null), successDuration);
@@ -29,12 +30,12 @@ export const useClipboard = (options: UseClipboardOptions = {}) => {
           setTimeout(() => setCopyState(null), successDuration);
         });
     },
-    [successDuration]
+    [successDuration],
   );
 
   /**
    * Checks if a specific content has been copied
-   * 
+   *
    * @param identifier The identifier of the copied content or true for standard check
    * @returns Whether the content is currently copied
    */
@@ -45,26 +46,23 @@ export const useClipboard = (options: UseClipboardOptions = {}) => {
       }
       return copyState === identifier;
     },
-    [copyState]
+    [copyState],
   );
 
   /**
    * Checks if an error occurred during copying
    */
-  const hasError = useCallback(
-    (): boolean => {
-      return copyState === 'error' || copyState === false;
-    },
-    [copyState]
-  );
+  const hasError = useCallback((): boolean => {
+    return copyState === 'error' || copyState === false;
+  }, [copyState]);
 
   return {
     copyToClipboard,
     copyState,
     isCopied,
     hasError,
-    resetCopyState: () => setCopyState(null)
+    resetCopyState: () => setCopyState(null),
   };
 };
 
-export default useClipboard; 
+export default useClipboard;
