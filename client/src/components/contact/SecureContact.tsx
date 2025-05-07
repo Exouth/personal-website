@@ -1,10 +1,10 @@
-import React from "react";
-import { motion } from "framer-motion";
-import useAnimation from "@hooks/useAnimation";
-import useClipboard from "@hooks/useClipboard";
-import useDownload from "@hooks/useDownload";
-import { pgpKey, pgpFingerprint } from "@data/pgp";
-import { FiCopy, FiDownload, FiExternalLink } from "react-icons/fi";
+import React from 'react';
+import { motion } from 'framer-motion';
+import useAnimation from '@hooks/useAnimation';
+import useClipboard from '@hooks/useClipboard';
+import useDownload from '@hooks/useDownload';
+import { pgpKey, pgpFingerprint } from '@data/pgp';
+import { FiCopy, FiDownload, FiExternalLink } from 'react-icons/fi';
 
 const SecureContact: React.FC = () => {
   const { fadeInUp } = useAnimation();
@@ -12,11 +12,11 @@ const SecureContact: React.FC = () => {
   const { markAsDownloaded, isDownloaded } = useDownload();
 
   const formatFingerprint = (fp: string): string => {
-    return fp.match(/.{1,4}/g)?.join(" ") || fp;
+    return fp.match(/.{1,4}/g)?.join(' ') || fp;
   };
 
   const handleDownload = () => {
-    markAsDownloaded("pgp-key");
+    markAsDownloaded('pgp-key');
   };
 
   return (
@@ -69,26 +69,22 @@ const SecureContact: React.FC = () => {
                 </svg>
               </div>
               <div className="ml-4">
-                <h4 className="text-lg font-semibold text-white">
-                  Fingerprint
-                </h4>
+                <h4 className="text-lg font-semibold text-white">Fingerprint</h4>
               </div>
             </div>
 
             <div className="relative w-full group">
               <div className="p-4 bg-gray-800 border border-gray-700 rounded-lg break-all text-sm font-mono flex justify-between items-center text-green-300 transition-all duration-300 group-hover:bg-gray-700 group-hover:border-green-800">
-                <div className="flex-grow mr-2 select-all">
-                  {formatFingerprint(pgpFingerprint)}
-                </div>
+                <div className="flex-grow mr-2 select-all">{formatFingerprint(pgpFingerprint)}</div>
                 <motion.button
                   className="p-2 hover:bg-gray-700/70 rounded-md transition-colors"
                   title="Copy Fingerprint"
-                  onClick={() => copyToClipboard(pgpFingerprint, "fingerprint")}
+                  onClick={() => copyToClipboard(pgpFingerprint, 'fingerprint')}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label="Copy fingerprint to clipboard"
                 >
-                  {isCopied("fingerprint") ? (
+                  {isCopied('fingerprint') ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-5 h-5 text-green-400"
@@ -139,7 +135,7 @@ const SecureContact: React.FC = () => {
                 </pre>
                 <div className="absolute top-3 right-3">
                   <motion.button
-                    onClick={() => copyToClipboard(pgpKey, "pgpkey")}
+                    onClick={() => copyToClipboard(pgpKey, 'pgpkey')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="flex items-center gap-2 text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded transition-colors"
@@ -147,7 +143,7 @@ const SecureContact: React.FC = () => {
                     title="Copy to clipboard"
                   >
                     <FiCopy size={14} />
-                    {isCopied("pgpkey") ? "Copied!" : "Copy"}
+                    {isCopied('pgpkey') ? 'Copied!' : 'Copy'}
                   </motion.button>
                 </div>
               </div>
@@ -165,11 +161,7 @@ const SecureContact: React.FC = () => {
                     onClick={handleDownload}
                   >
                     <FiDownload size={16} />
-                    <span>
-                      {isDownloaded("pgp-key")
-                        ? "Downloaded!"
-                        : "Download Public-Key"}
-                    </span>
+                    <span>{isDownloaded('pgp-key') ? 'Downloaded!' : 'Download Public-Key'}</span>
                   </motion.a>
 
                   <motion.a

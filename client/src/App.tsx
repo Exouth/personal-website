@@ -1,9 +1,9 @@
-import { BrowserRouter } from "react-router-dom";
-import Navbar from "@components/layout/Navbar";
-import Footer from "@components/layout/Footer";
-import ScrollToTop from "@components/router/ScrollToTop";
-import AppRouter from "@components/router/AppRouter";
-import BackgroundEffect from "@components/layout/BackgroundEffect";
+import { BrowserRouter } from 'react-router-dom';
+import Navbar from '@components/layout/Navbar';
+import Footer from '@components/layout/Footer';
+import ScrollToTop from '@components/router/ScrollToTop';
+import AppRouter from '@components/router/AppRouter';
+import BackgroundEffect from '@components/layout/BackgroundEffect';
 
 export default function App() {
   return (

@@ -56,7 +56,7 @@ YatDTP8wiUZIJN0trA1J/Kl7Qha2PSrpdZCLVT4fYGZ7iInNOm/KqzVA/VE+J6nk
 /**
  * PGP Fingerprint
  */
-export const pgpFingerprint = "E0CABAD86E8B9B928ED654B0F87BD3B25268398C";
+export const pgpFingerprint = 'E0CABAD86E8B9B928ED654B0F87BD3B25268398C';
 
 /**
  * PGP-Signatures for Cryptocurrency Addresses
@@ -258,5 +258,5 @@ Dk8ugp49B6ciTcCFr2nMM1BeNJTYiZHLhPmlmtU6iaKJoVwT6RMLr7MavAjF5+in
 kGIq+un4c/q6zPBwbiCopayGjVvtnmWmmKy+CbjZuiytxvDoX3w=
 =TAzK
 -----END PGP SIGNATURE-----
-`
-}; 
+`,
+};

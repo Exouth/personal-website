@@ -1,6 +1,6 @@
-import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
-import LoadingFallback from "@pages/LoadingFallback";
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import LoadingFallback from '@pages/LoadingFallback';
 
 // Lazy-load pages for better performance
 const Home = lazy(() => import('@pages/Home'));
@@ -24,4 +24,4 @@ const AppRouter = () => {
   );
 };
 
-export default AppRouter; 
+export default AppRouter;

@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
-import { AnimatePresence } from "framer-motion";
-import useResponsivePadding from "@hooks/useResponsivePadding";
-import { getPageMetadata } from "@data/seo";
-import { DonationOptions } from "@components/donate/DonationOptions";
-import { PGPKeyDisplay } from "@components/donate/PGPKeyDisplay";
-import { CryptoAddressDisplay } from "@components/donate/CryptoAddressDisplay";
-import { AnimatedGradientText } from "@ui/magicui/animated-gradient-text";
+import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
+import { AnimatePresence } from 'framer-motion';
+import useResponsivePadding from '@hooks/useResponsivePadding';
+import { getPageMetadata } from '@data/seo';
+import { DonationOptions } from '@components/donate/DonationOptions';
+import { PGPKeyDisplay } from '@components/donate/PGPKeyDisplay';
+import { CryptoAddressDisplay } from '@components/donate/CryptoAddressDisplay';
+import { AnimatedGradientText } from '@ui/magicui/animated-gradient-text';
 
 const Donate = () => {
   const { sectionPadding, containerPadding } = useResponsivePadding();
@@ -18,7 +18,7 @@ const Donate = () => {
 
   const seoMetadata = getPageMetadata({
     description:
-      "Support my projects through cryptocurrency donations or Ko-fi. Your contribution helps keep development going!",
+      'Support my projects through cryptocurrency donations or Ko-fi. Your contribution helps keep development going!',
   });
 
   useEffect(() => {
@@ -27,11 +27,10 @@ const Donate = () => {
         const yOffset = -20;
         const element = selectedRef.current;
         if (element) {
-          const y =
-            element.getBoundingClientRect().top + window.scrollY + yOffset;
+          const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
           window.scrollTo({
             top: y,
-            behavior: "smooth",
+            behavior: 'smooth',
           });
           setIsFirstSelection(false);
         }
@@ -69,9 +68,7 @@ const Donate = () => {
             />
           </div>
 
-          <div
-            className={`container mx-auto ${containerPadding} h-full max-w-6xl relative z-10`}
-          >
+          <div className={`container mx-auto ${containerPadding} h-full max-w-6xl relative z-10`}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -89,16 +86,13 @@ const Donate = () => {
                 </AnimatedGradientText>
               </h1>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                Thank you for stopping by! If my work has helped or inspired
-                you, even a small donation would mean the world to me. There is
-                absolutely no need to donate, but if you really enjoyed my tools
-                or mods, I would be incredibly grateful for your support. Your
-                contribution helps me spend more time building things and
-                bringing new ideas to life.
+                Thank you for stopping by! If my work has helped or inspired you, even a small
+                donation would mean the world to me. There is absolutely no need to donate, but if
+                you really enjoyed my tools or mods, I would be incredibly grateful for your
+                support. Your contribution helps me spend more time building things and bringing new
+                ideas to life.
               </p>
-              <p className="text-lg text-gray-300 mt-2">
-                Thank you very much :)
-              </p>
+              <p className="text-lg text-gray-300 mt-2">Thank you very much :)</p>
             </motion.div>
 
             <DonationOptions
@@ -106,16 +100,11 @@ const Donate = () => {
               setSelectedOption={setSelectedOption}
             />
 
-            <PGPKeyDisplay
-              showPgpKey={showPgpKey}
-              setShowPgpKey={setShowPgpKey}
-            />
+            <PGPKeyDisplay showPgpKey={showPgpKey} setShowPgpKey={setShowPgpKey} />
 
             <div ref={selectedRef}>
               <AnimatePresence mode="wait">
-                {selectedOption && (
-                  <CryptoAddressDisplay selectedOption={selectedOption} />
-                )}
+                {selectedOption && <CryptoAddressDisplay selectedOption={selectedOption} />}
               </AnimatePresence>
             </div>
           </div>

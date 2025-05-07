@@ -3,7 +3,7 @@ import { UseDownloadOptions, DownloadState } from '@/types/hooks';
 
 /**
  * Hook for managing download operations with feedback status
- * 
+ *
  * @param options Options for the hook
  * @returns Download functions and status
  */
@@ -13,7 +13,7 @@ export const useDownload = (options: UseDownloadOptions = {}) => {
 
   /**
    * Marks a file as downloaded and sets a feedback status
-   * 
+   *
    * @param identifier Optional: An identifier for the downloaded file (for tracking multiple downloads)
    */
   const markAsDownloaded = useCallback(
@@ -21,12 +21,12 @@ export const useDownload = (options: UseDownloadOptions = {}) => {
       setDownloadState(identifier !== undefined ? identifier : true);
       setTimeout(() => setDownloadState(null), successDuration);
     },
-    [successDuration]
+    [successDuration],
   );
 
   /**
    * Checks if a specific file has been downloaded
-   * 
+   *
    * @param identifier The identifier of the downloaded file or true for standard check
    * @returns Whether the file is currently marked as downloaded
    */
@@ -37,15 +37,15 @@ export const useDownload = (options: UseDownloadOptions = {}) => {
       }
       return downloadState === identifier;
     },
-    [downloadState]
+    [downloadState],
   );
 
   return {
     markAsDownloaded,
     downloadState,
     isDownloaded,
-    resetDownloadState: () => setDownloadState(null)
+    resetDownloadState: () => setDownloadState(null),
   };
 };
 
-export default useDownload; 
+export default useDownload;

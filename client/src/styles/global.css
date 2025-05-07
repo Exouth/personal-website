@@ -1,14 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import 'tailwindcss';
 
 :root {
-  --font-inter: "Inter", system-ui, -apple-system, sans-serif;
-  
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+
   --bg-color: #080a13;
   --text-color: #ffffff;
   --primary-color: #3b82f6;
   --secondary-color: #ec4899;
-  
+
   --card-bg: #111827;
   --card-border: #1f2937;
   --input-bg: #1f2937;
@@ -82,5 +82,7 @@ body {
 
 /* Box Shadow for Cards */
 .card-shadow {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.22);
-} 
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    0 6px 6px rgba(0, 0, 0, 0.22);
+}

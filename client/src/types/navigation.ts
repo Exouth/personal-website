@@ -16,4 +16,4 @@ export interface SocialLinkInfo {
   name: string;
   href: string;
   ariaLabel: string;
-} 
+}

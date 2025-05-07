@@ -4,7 +4,7 @@ import { WindowSize } from '@/types/hooks';
 
 /**
  * Hook for querying the window size
- * 
+ *
  * @param debounceDelay Delay in ms for the debounce function (optional)
  * @returns The object with the width and height of the window
  */
@@ -13,7 +13,7 @@ export const useWindowSize = (debounceDelay: number = 250): WindowSize => {
     width: 0,
     height: 0,
     isClient: false,
-    breakpoint: 'lg'
+    breakpoint: 'lg',
   });
 
   const getBreakpoint = (width: number): WindowSize['breakpoint'] => {
@@ -28,12 +28,12 @@ export const useWindowSize = (debounceDelay: number = 250): WindowSize => {
   const getSize = useCallback((): WindowSize => {
     const width = window.innerWidth;
     const height = window.innerHeight;
-    
+
     return {
       width,
       height,
       isClient: true,
-      breakpoint: getBreakpoint(width)
+      breakpoint: getBreakpoint(width),
     };
   }, []);
 

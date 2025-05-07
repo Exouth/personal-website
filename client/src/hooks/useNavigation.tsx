@@ -8,36 +8,42 @@ import { UseNavigationOptions } from '@/types/hooks';
 export const useNavigation = (options: UseNavigationOptions) => {
   const { scrollToSection, navigate, isHomePage, onBeforeNavigate } = options;
 
-  const handleNavigation = useCallback((href: string) => {
-    if (onBeforeNavigate) {
-      onBeforeNavigate();
-    }
-    
-    if (href.startsWith('#')) {
-      const sectionId = href.substring(1);
-      
-      if (isHomePage) {
-        scrollToSection(sectionId);
-      } else {
-        sessionStorage.setItem('scrollTarget', sectionId);
-        navigate('/');
+  const handleNavigation = useCallback(
+    (href: string) => {
+      if (onBeforeNavigate) {
+        onBeforeNavigate();
       }
-    } else if (href.startsWith('/')) {
-      navigate(href);
-    } else {
-      window.open(href, '_blank', 'noopener,noreferrer');
-    }
-  }, [scrollToSection, isHomePage, navigate, onBeforeNavigate]);
 
-  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    handleNavigation(href);
-  }, [handleNavigation]);
+      if (href.startsWith('#')) {
+        const sectionId = href.substring(1);
+
+        if (isHomePage) {
+          scrollToSection(sectionId);
+        } else {
+          sessionStorage.setItem('scrollTarget', sectionId);
+          navigate('/');
+        }
+      } else if (href.startsWith('/')) {
+        navigate(href);
+      } else {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      }
+    },
+    [scrollToSection, isHomePage, navigate, onBeforeNavigate],
+  );
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      handleNavigation(href);
+    },
+    [handleNavigation],
+  );
 
   return {
     handleNavigation,
-    handleNavClick
+    handleNavClick,
   };
 };
 
-export default useNavigation; 
+export default useNavigation;

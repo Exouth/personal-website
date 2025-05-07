@@ -1,8 +1,8 @@
-import React from "react";
-import { motion } from "framer-motion";
-import useAnimation from "@hooks/useAnimation";
-import { StatsCardsProps } from "@/types/ui";
-import { defaultStats as dataDefaultStats } from "@data/stats";
+import React from 'react';
+import { motion } from 'framer-motion';
+import useAnimation from '@hooks/useAnimation';
+import { StatsCardsProps } from '@/types/ui';
+import { defaultStats as dataDefaultStats } from '@data/stats';
 
 const defaultStats = dataDefaultStats.map((stat, index) => {
   const icons = [

@@ -1,10 +1,10 @@
-import React from "react";
-import { motion } from "framer-motion";
-import useAnimation from "@hooks/useAnimation";
-import { ProjectBase } from "@/types/project";
-import { projectCategories } from "@data/projects";
-import { buttonColors, categoryColors, hoverTextColors } from "@data/ui";
-import { ColorKey } from "@/types/ui";
+import React from 'react';
+import { motion } from 'framer-motion';
+import useAnimation from '@hooks/useAnimation';
+import { ProjectBase } from '@/types/project';
+import { projectCategories } from '@data/projects';
+import { buttonColors, categoryColors, hoverTextColors } from '@data/ui';
+import { ColorKey } from '@/types/ui';
 
 const ProjectCard: React.FC<ProjectBase> = ({
   id,
@@ -19,8 +19,8 @@ const ProjectCard: React.FC<ProjectBase> = ({
   const { scaleIn, pulse, hoverUp } = useAnimation();
 
   const categoryInfo = projectCategories[category];
-  const colorKey = (categoryInfo?.color || "purple") as ColorKey;
-  
+  const colorKey = (categoryInfo?.color || 'purple') as ColorKey;
+
   const categoryColorClass = categoryColors[colorKey];
   const dynamicHoverTextClass = hoverTextColors[colorKey];
   const dynamicButtonClass = buttonColors[colorKey];
@@ -46,9 +46,7 @@ const ProjectCard: React.FC<ProjectBase> = ({
                     {...pulse()}
                     aria-hidden="true"
                   />
-                  <span className="text-green-500 text-sm font-medium">
-                    Active Project
-                  </span>
+                  <span className="text-green-500 text-sm font-medium">Active Project</span>
                 </div>
               )}
             </h3>

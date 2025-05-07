@@ -1,21 +1,21 @@
-import { cn } from "@lib/utils";
-import { AnimatedGradientTextProps } from "@/types/ui";
+import { cn } from '@lib/utils';
+import { AnimatedGradientTextProps } from '@/types/ui';
 
 export function AnimatedGradientText({
   children,
   className,
   speed = 1,
-  colorFrom = "#ffaa40",
-  colorTo = "#9c40ff",
+  colorFrom = '#ffaa40',
+  colorTo = '#9c40ff',
   ...props
 }: AnimatedGradientTextProps) {
   return (
     <span
       style={
         {
-          "--bg-size": `${speed * 300}%`,
-          "--color-from": colorFrom,
-          "--color-to": colorTo,
+          '--bg-size': `${speed * 300}%`,
+          '--color-from': colorFrom,
+          '--color-to': colorTo,
         } as React.CSSProperties
       }
       className={cn(

@@ -97,4 +97,4 @@ export interface UseDownloadOptions {
 /**
  * Type for the Download status
  */
-export type DownloadState = string | boolean | null; 
+export type DownloadState = string | boolean | null;

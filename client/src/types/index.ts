@@ -1,6 +1,6 @@
 /**
  * Index file for all types
- * 
+ *
  * By using this file, types can be easily imported:
  * import { Project, WindowSize, AnimatedGradientTextProps } from '@/types'
  */
@@ -12,7 +12,7 @@ export * from './project';
 export * from './ui';
 
 // Hook types
-export * from './hooks'; 
+export * from './hooks';
 
 // Navigation types
 export * from './navigation';
