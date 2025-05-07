@@ -3,9 +3,9 @@
 A modern and responsive personal website with a brief intro, projects, and links.
 
 ![License](https://img.shields.io/badge/license-View%20Only-red)
-![React](https://img.shields.io/badge/React-19.0.0-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue)
-![Vite](https://img.shields.io/badge/Vite-6.3.0-blue)
+![React](https://img.shields.io/badge/React-19.1.0-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue)
+![Vite](https://img.shields.io/badge/Vite-6.3.5-blue)
 
 ## Overview
 
@@ -34,7 +34,7 @@ client/
 
 ## Tech Stack
 
-- **Core**: React 19, Vite 6.3 with SWC, TypeScript 5.7.2
+- **Core**: React 19, Vite 6.3 with SWC, TypeScript 5.8.3
 
 - **Main Libraries**:
   - TailwindCSS: UI styling
