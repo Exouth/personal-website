@@ -15,7 +15,7 @@ export const navigationLinks: NavLink[] = [
       { name: "RequiemAutoMagicPatcher", href: "#requiemautomagicpatcher" },
     ],
   },
-  { name: "Donate", href: "#donate" },
+  { name: "Donate", href: "/donate" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -26,7 +26,7 @@ export const footerLinks: { name: string; href: string }[] = [
   { name: "Home", href: "#home" },
   { name: "About Me", href: "#about-me" },
   { name: "Projects", href: "#projects" },
-  { name: "Donate", href: "#donate" },
+  { name: "Donate", href: "/donate" },
   { name: "Contact", href: "#contact" },
 ];
 

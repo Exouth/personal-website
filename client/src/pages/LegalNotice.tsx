@@ -31,7 +31,7 @@ const LegalNotice = () => {
         <html {...seoMetadata.htmlAttributes} />
       </Helmet>
 
-      <main className="w-full flex-grow flex flex-col pt-24">
+      <main className="w-full flex-grow flex flex-col pt-16">
         <section 
           className={`${sectionPadding} bg-gray-900/30 flex-grow`}
           aria-label="Legal Notice"

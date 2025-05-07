@@ -50,10 +50,12 @@ const Home = () => {
         {isLoaded && <Hero />}
         
         <section 
-          className={`${sectionPadding} bg-gray-900/30`}
+          className={`${sectionPadding} relative`}
           aria-label="Content area"
         >
-          <div className={`container mx-auto ${containerPadding}`}>
+          <div className="absolute inset-0 backdrop-blur-sm bg-gray-900/10 border-t border-gray-800/30"></div>
+          
+          <div className={`container mx-auto ${containerPadding} relative z-10`}>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               <AboutMe />
               <ProjectsSection />
@@ -66,4 +68,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;
