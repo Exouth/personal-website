@@ -74,7 +74,7 @@ export default function Navbar() {
           </motion.a>
 
           {!isMobile && (
-            <div className="flex space-x-8">
+            <div className="flex items-center space-x-8">
               {navigationLinks.map((item) =>
                 item.dropdown ? (
                   <motion.div
